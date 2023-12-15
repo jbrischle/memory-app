@@ -6,13 +6,7 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Board from './board/board.tsx';
@@ -32,16 +26,14 @@ export default function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
+      <View style={backgroundStyle}>
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Board list={list} />
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -69,7 +61,7 @@ function shuffle(array: string[]) {
 function getRandomPokemonIds() {
   const number = new Set<string>();
 
-  while (number.size < 16) {
+  while (number.size < 18) {
     const min = Math.ceil(1);
     const max = Math.floor(649);
     const num = Math.floor(Math.random() * (max - min + 1)) + min;

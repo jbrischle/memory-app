@@ -9,15 +9,12 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
   );
 
   useEffect(() => {
-    function checkIfIsPair(local: {[p: number]: string}): void {
-      const [first, second] = Object.values(local);
-      if (first && second && first === second) {
-        setRevealedPairs({...revealedPairs, ...local});
-      }
+    const [first, second] = Object.values(currentTurn);
+    if (first && second && first === second) {
+      setRevealedPairs({...revealedPairs, ...currentTurn});
+      setCurrentTurn({});
     }
-
-    checkIfIsPair(currentTurn);
-  });
+  }, [currentTurn, revealedPairs]);
 
   function onClick(entry: string, index: number) {
     const local = {...currentTurn};
@@ -41,14 +38,18 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
   }
 
   return (
-    <View style={styles.grid}>
-      {list.map((entry, index) => (
-        <TouchableHighlight key={index} onPress={() => onClick(entry, index)}>
-          <View style={isRevealed(index) ? styles.card__revealed : styles.card}>
-            <Card id={entry} showBack={shouldShowBack(index)} />
-          </View>
-        </TouchableHighlight>
-      ))}
+    <View>
+      <View style={styles.score}></View>
+      <View style={styles.grid}>
+        {list.map((entry, index) => (
+          <TouchableHighlight key={index} onPress={() => onClick(entry, index)}>
+            <View
+              style={isRevealed(index) ? styles.card__revealed : styles.card}>
+              <Card id={entry} showBack={shouldShowBack(index)} />
+            </View>
+          </TouchableHighlight>
+        ))}
+      </View>
     </View>
   );
 }
@@ -56,11 +57,14 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
 const ScreenHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
+  score: {},
   grid: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: 1,
     height: ScreenHeight,
+    padding: 1,
+    alignContent: 'center',
   },
   card: {
     borderStyle: 'solid',

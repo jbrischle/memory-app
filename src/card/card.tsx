@@ -27,22 +27,8 @@ export function Card({
   }
 
   if (showBack) {
-    return (
-      <Image
-        source={{uri: back}}
-        width={50}
-        height={50}
-        style={{width: 50, height: 50}}
-      />
-    );
+    return <Image source={{uri: back}} style={{width: 75, height: 75}} />;
   } else {
-    return (
-      <Image
-        source={{uri: front}}
-        width={50}
-        height={50}
-        style={{width: 50, height: 50}}
-      />
-    );
+    return <Image source={{uri: front}} style={{width: 75, height: 75}} />;
   }
 }
