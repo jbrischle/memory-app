@@ -4,12 +4,18 @@ import {Dimensions, StyleSheet, TouchableHighlight, View} from 'react-native';
 
 export default function Board({list}: {list: string[]}): React.JSX.Element {
   const [currentTurn, setCurrentTurn] = useState({} as Record<number, string>);
+  const [lastRevealedPair, setLastRevealedPair] = useState(
+    {} as Record<number, string>,
+  );
   const [revealedPairs, setRevealedPairs] = useState(
     {} as Record<number, string>,
   );
 
   useEffect(() => {
     const [first, second] = Object.values(currentTurn);
+    console.log(first, second);
+    setLastRevealedPair(currentTurn);
+
     if (first && second && first === second) {
       setRevealedPairs({...revealedPairs, ...currentTurn});
       setCurrentTurn({});
@@ -29,23 +35,29 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
   function shouldShowBack(index: number) {
     return (
       !Object.keys(currentTurn).includes(index.toString()) &&
-      !Object.keys(revealedPairs).includes(index.toString())
+      !Object.keys(revealedPairs).includes(index.toString()) &&
+      !Object.keys(lastRevealedPair).includes(index.toString())
     );
   }
 
   function isRevealed(index: number) {
-    return Object.keys(revealedPairs).includes(index.toString());
+    return (
+      Object.keys(revealedPairs).includes(index.toString()) ||
+      Object.keys(lastRevealedPair).includes(index.toString())
+    );
   }
 
   return (
     <View>
       <View style={styles.score}></View>
       <View style={styles.grid}>
-        {list.map((entry, index) => (
-          <TouchableHighlight key={index} onPress={() => onClick(entry, index)}>
+        {list.map((pokemonId, index) => (
+          <TouchableHighlight
+            key={index}
+            onPress={() => onClick(pokemonId, index)}>
             <View
               style={isRevealed(index) ? styles.card__revealed : styles.card}>
-              <Card id={entry} showBack={shouldShowBack(index)} />
+              <Card id={pokemonId} showBack={shouldShowBack(index)} />
             </View>
           </TouchableHighlight>
         ))}
