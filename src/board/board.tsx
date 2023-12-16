@@ -1,8 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from '../card/card.tsx';
-import {Dimensions, StyleSheet, TouchableHighlight, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableHighlight,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
 export default function Board({list}: {list: string[]}): React.JSX.Element {
+  const {width, height} = useWindowDimensions();
   const [currentTurn, setCurrentTurn] = useState({} as Record<number, string>);
   const [lastRevealedPair, setLastRevealedPair] = useState(
     {} as Record<number, string>,
@@ -46,7 +52,7 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
   return (
     <View>
       <View style={styles.score}></View>
-      <View style={styles.grid}>
+      <View style={[styles.grid, {height: height, width: width}]}>
         {list.map((pokemonId, index) => (
           <TouchableHighlight
             key={index}
@@ -63,16 +69,14 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
   );
 }
 
-const ScreenHeight = Dimensions.get('window').height;
-
 const styles = StyleSheet.create({
   score: {},
   grid: {
+    borderStyle: 'solid',
+    borderWidth: 10,
     display: 'flex',
     flexWrap: 'wrap',
-    gap: 1,
-    height: ScreenHeight,
-    padding: 50,
+    gap: 5,
     alignContent: 'center',
   },
 });
