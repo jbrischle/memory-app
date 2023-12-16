@@ -13,7 +13,6 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
 
   useEffect(() => {
     const [first, second] = Object.values(currentTurn);
-    console.log(first, second);
     setLastRevealedPair(currentTurn);
 
     if (first && second && first === second) {
@@ -40,11 +39,8 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
     );
   }
 
-  function isRevealed(index: number) {
-    return (
-      Object.keys(revealedPairs).includes(index.toString()) ||
-      Object.keys(lastRevealedPair).includes(index.toString())
-    );
+  function isInCurrentTurn(index: number) {
+    return Object.keys(currentTurn).includes(index.toString());
   }
 
   return (
@@ -55,10 +51,11 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
           <TouchableHighlight
             key={index}
             onPress={() => onClick(pokemonId, index)}>
-            <View
-              style={isRevealed(index) ? styles.card__revealed : styles.card}>
-              <Card id={pokemonId} showBack={shouldShowBack(index)} />
-            </View>
+            <Card
+              id={pokemonId}
+              showBack={shouldShowBack(index)}
+              current={isInCurrentTurn(index)}
+            />
           </TouchableHighlight>
         ))}
       </View>
@@ -75,27 +72,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 1,
     height: ScreenHeight,
-    padding: 1,
+    padding: 50,
     alignContent: 'center',
-  },
-  card: {
-    borderStyle: 'solid',
-    borderColor: '#a6a098',
-    borderWidth: 1,
-    borderRadius: 12,
-    backgroundColor: '#a6a098',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-
-  card__revealed: {
-    borderStyle: 'solid',
-    borderColor: '#a6a098',
-    borderWidth: 1,
-    borderRadius: 12,
-    backgroundColor: '#a6a098',
-    display: 'flex',
-    justifyContent: 'center',
-    opacity: 50,
   },
 });
