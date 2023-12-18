@@ -1,14 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from '../card/card.tsx';
-import {
-  StyleSheet,
-  TouchableHighlight,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableHighlight, View} from 'react-native';
 
 export default function Board({list}: {list: string[]}): React.JSX.Element {
-  const {width, height} = useWindowDimensions();
   const [currentTurn, setCurrentTurn] = useState({} as Record<number, string>);
   const [lastRevealedPair, setLastRevealedPair] = useState(
     {} as Record<number, string>,
@@ -50,21 +44,18 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
   }
 
   return (
-    <View>
-      <View style={styles.score}></View>
-      <View style={[styles.grid, {height: height, width: width}]}>
-        {list.map((pokemonId, index) => (
-          <TouchableHighlight
-            key={index}
-            onPress={() => onClick(pokemonId, index)}>
-            <Card
-              id={pokemonId}
-              showBack={shouldShowBack(index)}
-              current={isInCurrentTurn(index)}
-            />
-          </TouchableHighlight>
-        ))}
-      </View>
+    <View style={styles.grid}>
+      {list.map((pokemonId, index) => (
+        <TouchableHighlight
+          key={index}
+          onPress={() => onClick(pokemonId, index)}>
+          <Card
+            id={pokemonId}
+            showBack={shouldShowBack(index)}
+            current={isInCurrentTurn(index)}
+          />
+        </TouchableHighlight>
+      ))}
     </View>
   );
 }
@@ -72,11 +63,11 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
 const styles = StyleSheet.create({
   score: {},
   grid: {
-    borderStyle: 'solid',
-    borderWidth: 10,
     display: 'flex',
+    flexDirection: 'row',
     flexWrap: 'wrap',
+    padding: 10,
+    justifyContent: 'center',
     gap: 5,
-    alignContent: 'center',
   },
 });
