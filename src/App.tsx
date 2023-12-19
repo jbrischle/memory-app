@@ -26,13 +26,15 @@ export default function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <View style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Board list={list} />
-        </View>
+      <View
+        style={[
+          backgroundStyle,
+          {
+            backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+            height: '100%',
+          },
+        ]}>
+        <Board list={list} />
       </View>
     </SafeAreaView>
   );
