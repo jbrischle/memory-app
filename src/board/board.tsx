@@ -23,6 +23,7 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
 
   function onClick(entry: string, index: number) {
     const local = {...currentTurn};
+
     if (Object.keys(local).length >= 2) {
       setCurrentTurn({[index]: entry});
     } else {
@@ -39,6 +40,10 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
     );
   }
 
+  function isAlreadyReveiled(index: number) {
+    return Object.keys(revealedPairs).includes(index.toString());
+  }
+
   function isInCurrentTurn(index: number) {
     return Object.keys(currentTurn).includes(index.toString());
   }
@@ -48,7 +53,8 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
       {list.map((pokemonId, index) => (
         <TouchableHighlight
           key={index}
-          onPress={() => onClick(pokemonId, index)}>
+          onPress={() => onClick(pokemonId, index)}
+          disabled={isAlreadyReveiled(index) || isInCurrentTurn(index)}>
           <Card
             id={pokemonId}
             showBack={shouldShowBack(index)}
