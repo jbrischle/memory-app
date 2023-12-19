@@ -6,19 +6,41 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  useColorScheme,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Board from './board/board.tsx';
 
 export default function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const {height, width} = useWindowDimensions();
+  const safeScreenSize = height * width;
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    flex: 1,
   };
 
-  const list = shuffle(getRandomPokemonIds());
+  let list;
+
+  switch (Platform.OS) {
+    case 'android':
+      list = shuffle(getRandomPokemonIds(safeScreenSize / 20000));
+      break;
+    case 'ios':
+      list = shuffle(getRandomPokemonIds(safeScreenSize / 20000));
+      break;
+    default:
+      list = shuffle(getRandomPokemonIds(safeScreenSize / 20000));
+      break;
+  }
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -31,7 +53,6 @@ export default function App(): React.JSX.Element {
           backgroundStyle,
           {
             backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-            height: '100%',
           },
         ]}>
         <Board list={list} />
@@ -60,10 +81,10 @@ function shuffle(array: string[]) {
   return array;
 }
 
-function getRandomPokemonIds() {
+function getRandomPokemonIds(count: number) {
   const number = new Set<string>();
 
-  while (number.size < 18) {
+  while (number.size < count) {
     const min = Math.ceil(1);
     const max = Math.floor(649);
     const num = Math.floor(Math.random() * (max - min + 1)) + min;
