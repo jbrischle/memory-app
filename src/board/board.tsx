@@ -40,7 +40,7 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
     );
   }
 
-  function isAlreadyReveiled(index: number) {
+  function isAlreadyRevealed(index: number) {
     return Object.keys(revealedPairs).includes(index.toString());
   }
 
@@ -54,11 +54,12 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
         <TouchableHighlight
           key={index}
           onPress={() => onClick(pokemonId, index)}
-          disabled={isAlreadyReveiled(index) || isInCurrentTurn(index)}>
+          disabled={isAlreadyRevealed(index) || isInCurrentTurn(index)}>
           <Card
             id={pokemonId}
             showBack={shouldShowBack(index)}
             current={isInCurrentTurn(index)}
+            revealed={isAlreadyRevealed(index)}
           />
         </TouchableHighlight>
       ))}

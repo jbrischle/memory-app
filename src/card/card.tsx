@@ -5,10 +5,12 @@ export function Card({
   id,
   showBack = true,
   current = false,
+  revealed = false,
 }: {
   id: string;
   showBack: boolean;
   current: boolean;
+  revealed: boolean;
 }): React.JSX.Element {
   let front;
   let back;
@@ -30,7 +32,11 @@ export function Card({
 
   return (
     <View
-      style={[styles.container, current ? styles.current : styles.container]}>
+      style={[
+        styles.container,
+        current ? styles.current : styles.container,
+        revealed ? styles.front : styles.container,
+      ]}>
       <Image source={{uri: showBack ? back : front}} style={styles.image} />
     </View>
   );
