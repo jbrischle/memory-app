@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "android-release-test": "npm run android -- --mode=release",
     "android-release": "react-native build-android --mode=release",
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator='iPhone 15'",
