@@ -1,15 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from '../card/card.tsx';
-import {
-  Button,
-  StyleSheet,
-  TouchableHighlight,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {Button, StyleSheet, TouchableHighlight, View} from 'react-native';
+import {useTranslation} from 'react-i18next';
 
 export default function Board({list}: {list: string[]}): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const {t} = useTranslation();
 
   const [score, setScore] = useState<[number, number]>([0, 0]);
   const [currentTurn, setCurrentTurn] = useState<Record<number, string>>({});
@@ -68,7 +63,7 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
         {/*<Text style={{color: isDarkMode ? Colors.lighter : Colors.darker}}>*/}
         {/*  {score[0]}:{score[1]}*/}
         {/*</Text>*/}
-        <Button title={'Restart'} onPress={() => reset()} />
+        <Button title={t('restart')} onPress={() => reset()} />
       </View>
       <View style={styles.grid}>
         {list.map((pokemonId, index) => (
@@ -104,5 +99,8 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'center',
     gap: 5,
+  },
+  button: {
+    borderRadius: 4,
   },
 });
