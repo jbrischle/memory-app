@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Card} from '../card/card.tsx';
 import {StyleSheet, TouchableHighlight, View} from 'react-native';
+import {GameContext} from '../GameState.tsx';
 
-export default function Board({list}: {list: string[]}): React.JSX.Element {
+export default function Board(): React.JSX.Element {
+  const game = useContext(GameContext);
   const [score, setScore] = useState<[number, number]>([0, 0]);
   const [currentTurn, setCurrentTurn] = useState<Record<number, string>>({});
   const [lastRevealedPair, setLastRevealedPair] = useState({});
@@ -10,7 +12,12 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
     {} as Record<number, string>,
   );
 
-  //TODO: state doesn't get reset if the component gets rendered or the properties change
+  useEffect(() => {
+    setCurrentTurn({});
+    setLastRevealedPair({});
+    setRevealedPairs({});
+    setScore([0, 0]);
+  }, [game]);
 
   useEffect(() => {
     const [first, second] = Object.values(currentTurn);
@@ -52,7 +59,7 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
   return (
     <View>
       <View style={styles.grid}>
-        {list.map((pokemonId, index) => (
+        {game.pokemonList.map((pokemonId, index) => (
           <TouchableHighlight
             key={index}
             onPress={() => onClick(pokemonId, index)}
