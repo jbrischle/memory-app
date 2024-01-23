@@ -74,12 +74,12 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.memory_app"
+    namespace "de.jbrischle.memory_app"
     defaultConfig {
-        applicationId "com.memory_app"
+        applicationId "de.jbrischle.memory_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 4
         versionName "1.0"
         resConfigs "en", "de"
     }

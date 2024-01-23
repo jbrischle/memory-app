@@ -1,4 +1,4 @@
-package com.memory_app
+package de.jbrischle.memory_app
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

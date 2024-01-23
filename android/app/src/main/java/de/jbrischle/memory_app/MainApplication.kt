@@ -1,4 +1,4 @@
-package com.memory_app
+package de.jbrischle.memory_app
 
 import android.app.Application
 import com.facebook.react.PackageList
