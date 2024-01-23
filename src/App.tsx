@@ -5,11 +5,13 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
+  Button,
   Platform,
   SafeAreaView,
   StatusBar,
+  StyleSheet,
   useColorScheme,
   useWindowDimensions,
   View,
@@ -17,29 +19,37 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Board from './board/board.tsx';
+import {useTranslation} from 'react-i18next';
 
 export default function App(): React.JSX.Element {
+  console.log('Render App');
+  const {t} = useTranslation();
   const isDarkMode = useColorScheme() === 'dark';
+
   const {height, width} = useWindowDimensions();
   const safeScreenSize = height * width;
+
+  const [pokemonList, setPokemonList] = useState<string[]>(
+    pokemonListForPlatform(safeScreenSize),
+  );
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     flex: 1,
   };
 
-  let list;
-
-  switch (Platform.OS) {
-    case 'android':
-      list = shuffle(getRandomPokemonIds(safeScreenSize / 20000));
-      break;
-    case 'ios':
-      list = shuffle(getRandomPokemonIds(safeScreenSize / 20000));
-      break;
-    default:
-      list = shuffle(getRandomPokemonIds(safeScreenSize / 20000));
-      break;
+  function reset() {
+    switch (Platform.OS) {
+      case 'android':
+        setPokemonList(shuffle(getRandomPokemonIds(safeScreenSize / 20000)));
+        break;
+      case 'ios':
+        setPokemonList(shuffle(getRandomPokemonIds(safeScreenSize / 20000)));
+        break;
+      default:
+        setPokemonList(shuffle(getRandomPokemonIds(safeScreenSize / 20000)));
+        break;
+    }
   }
 
   return (
@@ -48,6 +58,12 @@ export default function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
+      <View style={styles.statusBar}>
+        {/*<Text style={{color: isDarkMode ? Colors.lighter : Colors.darker}}>*/}
+        {/*  {score[0]}:{score[1]}*/}
+        {/*</Text>*/}
+        <Button title={t('restart')} onPress={() => reset()} />
+      </View>
       <View
         style={[
           backgroundStyle,
@@ -55,11 +71,21 @@ export default function App(): React.JSX.Element {
             backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
           },
         ]}>
-        <Board list={list} />
+        <Board list={pokemonList} />
       </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  statusBar: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
+    gap: 50,
+  },
+});
 
 function shuffle(array: string[]) {
   let currentIndex = array.length,
@@ -92,4 +118,15 @@ function getRandomPokemonIds(count: number) {
   }
 
   return [...Array.from(number), ...Array.from(number)];
+}
+
+function pokemonListForPlatform(safeScreenSize: number) {
+  switch (Platform.OS) {
+    case 'android':
+      return shuffle(getRandomPokemonIds(safeScreenSize / 20000));
+    case 'ios':
+      return shuffle(getRandomPokemonIds(safeScreenSize / 20000));
+    default:
+      return shuffle(getRandomPokemonIds(safeScreenSize / 20000));
+  }
 }

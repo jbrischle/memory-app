@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from '../card/card.tsx';
-import {Button, StyleSheet, TouchableHighlight, View} from 'react-native';
-import {useTranslation} from 'react-i18next';
+import {StyleSheet, TouchableHighlight, View} from 'react-native';
 
 export default function Board({list}: {list: string[]}): React.JSX.Element {
-  const {t} = useTranslation();
-
   const [score, setScore] = useState<[number, number]>([0, 0]);
   const [currentTurn, setCurrentTurn] = useState<Record<number, string>>({});
   const [lastRevealedPair, setLastRevealedPair] = useState({});
   const [revealedPairs, setRevealedPairs] = useState<Record<number, string>>(
     {} as Record<number, string>,
   );
+
+  //TODO: state doesn't get reset if the component gets rendered or the properties change
 
   useEffect(() => {
     const [first, second] = Object.values(currentTurn);
@@ -22,13 +21,6 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
       setCurrentTurn({});
     }
   }, [currentTurn, revealedPairs]);
-
-  function reset() {
-    setCurrentTurn({});
-    setLastRevealedPair({});
-    setRevealedPairs({});
-    setScore([0, 0]);
-  }
 
   function onClick(entry: string, index: number) {
     const local = {...currentTurn};
@@ -59,12 +51,6 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
 
   return (
     <View>
-      <View style={styles.statusBar}>
-        {/*<Text style={{color: isDarkMode ? Colors.lighter : Colors.darker}}>*/}
-        {/*  {score[0]}:{score[1]}*/}
-        {/*</Text>*/}
-        <Button title={t('restart')} onPress={() => reset()} />
-      </View>
       <View style={styles.grid}>
         {list.map((pokemonId, index) => (
           <TouchableHighlight
@@ -85,13 +71,6 @@ export default function Board({list}: {list: string[]}): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  statusBar: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
-    gap: 50,
-  },
   grid: {
     display: 'flex',
     flexDirection: 'row',
