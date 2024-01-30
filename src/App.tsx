@@ -15,8 +15,6 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Board from './board/board.tsx';
 import {useTranslation} from 'react-i18next';
 import {
@@ -26,6 +24,7 @@ import {
   GameState,
   pokemonListForPlatform,
 } from './GameState.tsx';
+import {DarkTheme, DefaultTheme} from './GlobalStyles.tsx';
 
 export default function App(): React.JSX.Element {
   const {t} = useTranslation();
@@ -38,10 +37,27 @@ export default function App(): React.JSX.Element {
     pokemonList: pokemonListForPlatform(safeScreenSize),
   } as GameState);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    flex: 1,
-  };
+  const styles = StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: isDarkMode
+        ? DarkTheme.colors.background
+        : DefaultTheme.colors.background,
+    },
+    statusBar: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'center',
+      padding: 10,
+    },
+    gameArea: {
+      flex: 1,
+      backgroundColor: isDarkMode
+        ? DarkTheme.colors.card
+        : DefaultTheme.colors.card,
+    },
+  });
 
   function reset() {
     gameDispatch({
@@ -51,24 +67,18 @@ export default function App(): React.JSX.Element {
   }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={styles.safeArea}>
       <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+        backgroundColor={
+          isDarkMode
+            ? DarkTheme.colors.background
+            : DefaultTheme.colors.background
+        }
       />
       <View style={styles.statusBar}>
-        {/*<Text style={{color: isDarkMode ? Colors.lighter : Colors.darker}}>*/}
-        {/*  {score[0]}:{score[1]}*/}
-        {/*</Text>*/}
         <Button title={t('restart')} onPress={() => reset()} />
       </View>
-      <View
-        style={[
-          backgroundStyle,
-          {
-            backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-          },
-        ]}>
+      <View style={styles.gameArea}>
         <GameContext.Provider value={game}>
           <GameDispatchContext.Provider value={gameDispatch}>
             <Board />
@@ -78,13 +88,3 @@ export default function App(): React.JSX.Element {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  statusBar: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
-    gap: 50,
-  },
-});
