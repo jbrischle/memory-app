@@ -1,56 +1,11 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Memory
 
-# Getting Started
+[Memory](https://en.wikipedia.org/wiki/Concentration_(card_game))
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Join on Android
 
-## Step 1: Start the Metro Server
+https://play.google.com/store/apps/details?id=de.jbrischle.memory_app
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Join on the web
 
-To start Metro, run the following command from the _root_ of your React Native project:
-
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-# Build app
-
-## Release Play Store
-
-1. Set password to build release (XXXXX/YYYYY) [gradle.properties](android/gradle.properties)
-2. ```npm run android-release```
-3. Go to https://play.google.com/console
-4. create release ....
+https://play.google.com/apps/testing/de.jbrischle.memory_app
