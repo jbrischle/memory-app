@@ -61,6 +61,7 @@ export default function Board(): React.JSX.Element {
       <View style={styles.grid}>
         {game.pokemonList.map((pokemonId, index) => (
           <TouchableHighlight
+            style={styles.card}
             key={index}
             onPress={() => onClick(pokemonId, index)}
             disabled={isAlreadyRevealed(index) || isInCurrentTurn(index)}>
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 5,
   },
-  button: {
-    borderRadius: 4,
+  card: {
+    borderRadius: 12,
   },
 });
