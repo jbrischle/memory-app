@@ -21,9 +21,9 @@
     "react-native-localization-settings": "1.0.x"
   },
   "devDependencies": {
-    "@babel/core": "7.20.x",
-    "@babel/preset-env": "7.20.x",
-    "@babel/runtime": "7.20.x",
+    "@babel/core": "7.23.x",
+    "@babel/preset-env": "7.23.x",
+    "@babel/runtime": "7.23.x",
     "@react-native/babel-preset": "0.73.x",
     "@react-native/eslint-config": "0.73.x",
     "@react-native/metro-config": "0.73.x",
