@@ -33,7 +33,7 @@
     "babel-jest": "29.6.x",
     "eslint": "8.19.x",
     "jest": "29.6.x",
-    "prettier": "2.8.x",
+    "prettier": "3.2.x",
     "react-test-renderer": "18.2.x",
     "typescript": "5.0.x"
   },
