@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "i18next": "23.7.x",
+    "i18next": "23.8.x",
     "react": "18.2.x",
     "react-i18next": "13.5.x",
     "react-native": "0.73.x",
