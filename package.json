@@ -30,9 +30,9 @@
     "@react-native/typescript-config": "0.73.x",
     "@types/react": "18.2.x",
     "@types/react-test-renderer": "18.0.x",
-    "babel-jest": "29.6.x",
+    "babel-jest": "29.7.x",
     "eslint": "8.19.x",
-    "jest": "29.6.x",
+    "jest": "29.7.x",
     "prettier": "2.8.x",
     "react-test-renderer": "18.2.x",
     "typescript": "5.0.x"
