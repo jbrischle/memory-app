@@ -37,12 +37,14 @@ export default function App(): React.JSX.Element {
     pokemonList: pokemonListForPlatform(safeScreenSize),
   } as GameState);
 
+  const safeAreaColor = isDarkMode
+    ? DarkTheme.colors.safeArea
+    : DefaultTheme.colors.safeArea;
+
   const styles = StyleSheet.create({
     safeArea: {
       flex: 1,
-      backgroundColor: isDarkMode
-        ? DarkTheme.colors.background
-        : DefaultTheme.colors.background,
+      backgroundColor: safeAreaColor,
     },
     statusBar: {
       display: 'flex',
@@ -54,8 +56,8 @@ export default function App(): React.JSX.Element {
     gameArea: {
       flex: 1,
       backgroundColor: isDarkMode
-        ? DarkTheme.colors.card
-        : DefaultTheme.colors.card,
+        ? DarkTheme.colors.background
+        : DefaultTheme.colors.background,
     },
   });
 
@@ -68,13 +70,7 @@ export default function App(): React.JSX.Element {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar
-        backgroundColor={
-          isDarkMode
-            ? DarkTheme.colors.background
-            : DefaultTheme.colors.background
-        }
-      />
+      <StatusBar backgroundColor={safeAreaColor} />
       <View style={styles.statusBar}>
         <Button title={t('restart')} onPress={() => reset()} />
       </View>

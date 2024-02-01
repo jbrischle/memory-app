@@ -1,5 +1,6 @@
-import {Image, Platform, StyleSheet, View} from 'react-native';
+import {Image, Platform, StyleSheet, useColorScheme, View} from 'react-native';
 import React from 'react';
+import {DarkTheme, DefaultTheme} from '../GlobalStyles.tsx';
 
 export function Card({
   id,
@@ -12,6 +13,8 @@ export function Card({
   current: boolean;
   revealed: boolean;
 }): React.JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
+
   let front;
   let back;
 
@@ -30,35 +33,35 @@ export function Card({
       break;
   }
 
+  const styles = StyleSheet.create({
+    image: {
+      width: 75,
+      height: 75,
+    },
+    front: {
+      opacity: 0.5,
+    },
+    current: {
+      backgroundColor: '#eebe86',
+    },
+    container: {
+      backgroundColor: isDarkMode
+        ? DarkTheme.colors.card
+        : DefaultTheme.colors.card,
+      display: 'flex',
+      justifyContent: 'center',
+      borderRadius: 12,
+    },
+  });
+
   return (
     <View
       style={[
         styles.container,
-        current ? styles.current : styles.container,
         revealed ? styles.front : styles.container,
+        current ? styles.current : styles.container,
       ]}>
       <Image source={{uri: showBack ? back : front}} style={styles.image} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  image: {
-    width: 75,
-    height: 75,
-  },
-  front: {
-    opacity: 0.5,
-  },
-  current: {
-    borderColor: '#746e66',
-    backgroundColor: '#746e66',
-  },
-  container: {
-    borderColor: '#a6a098',
-    borderRadius: 12,
-    backgroundColor: '#a6a098',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-});
