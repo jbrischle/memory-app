@@ -1,0 +1,27 @@
+{
+  "de": {
+    "translation": {
+      "restart": "neues spiel"
+    }
+  },
+  "en": {
+    "translation": {
+      "restart": "new game"
+    }
+  },
+  "fr": {
+    "translation": {
+      "restart": "nouveau jeu"
+    }
+  },
+  "it": {
+    "translation": {
+      "restart": "nuovo gioco"
+    }
+  },
+  "es": {
+    "translation": {
+      "restart": "nuevo juego"
+    }
+  }
+}
