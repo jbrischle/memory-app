@@ -16,7 +16,7 @@
   "dependencies": {
     "@os-team/i18next-react-native-language-detector": "^1.0.31",
     "i18next": "23.8.x",
-    "react": "18.2.x",
+    "react": "18.3.x",
     "react-i18next": "14.0.x",
     "react-native": "0.73.x"
   },
@@ -28,13 +28,13 @@
     "@react-native/eslint-config": "0.73.x",
     "@react-native/metro-config": "0.73.x",
     "@react-native/typescript-config": "0.74.x",
-    "@types/react": "18.2.x",
+    "@types/react": "18.3.x",
     "@types/react-test-renderer": "18.0.x",
     "babel-jest": "29.7.x",
     "eslint": "8.56.x",
     "jest": "29.7.x",
     "prettier": "3.2.x",
-    "react-test-renderer": "18.2.x",
+    "react-test-renderer": "18.3.x",
     "typescript": "5.0.x"
   },
   "engines": {
