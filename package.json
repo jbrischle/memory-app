@@ -35,7 +35,7 @@
     "jest": "29.7.x",
     "prettier": "3.2.x",
     "react-test-renderer": "18.2.x",
-    "typescript": "5.0.x"
+    "typescript": "5.6.x"
   },
   "engines": {
     "node": ">=18"
