@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@os-team/i18next-react-native-language-detector": "^1.0.31",
-    "i18next": "23.8.x",
+    "i18next": "23.16.x",
     "react": "18.2.x",
     "react-i18next": "14.0.x",
     "react-native": "0.73.x"
