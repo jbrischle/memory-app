@@ -26,7 +26,7 @@
     "@babel/runtime": "7.23.x",
     "@react-native/babel-preset": "0.73.x",
     "@react-native/eslint-config": "0.73.x",
-    "@react-native/metro-config": "0.73.x",
+    "@react-native/metro-config": "0.76.x",
     "@react-native/typescript-config": "0.74.x",
     "@types/react": "18.2.x",
     "@types/react-test-renderer": "18.0.x",
